@@ -1,28 +1,28 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("subscription")
-export class Subscription {
-  @PrimaryGeneratedColumn()
+@Entity("subscriptions")
+export class Subscriptions {
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ default: true })
   support: boolean;
 
-  @Column()
+  @Column({ default: true })
   fast_delivery: boolean;
 
-  @Column()
+  @Column({ default: true })
   discount: boolean;
 
-  @Column()
+  @Column({ default: true })
   transaction_history: boolean;
 
-  @Column()
+  @Column({ default: false })
   weekend_deals: boolean;
 
-  @Column()
+  @Column({ default: false })
   dashboard_access: boolean;
 
-  @Column()
+  @Column({ default: false })
   premium_group: boolean;
 }

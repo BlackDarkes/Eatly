@@ -3,13 +3,16 @@ import { User } from "./users.entity";
 
 @Entity("purchases_history")
 export class PurchasesHistory {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("uuid")
+  user_id: string;
+
+  @Column("text", { array: true })
   history: string[];
 
-  @Column()
+  @Column("varchar", { length: 255 })
   price: string;
 
   @ManyToOne(() => User, (user) => user.purchasesHistory)

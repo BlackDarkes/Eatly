@@ -1,17 +1,21 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Article } from "./articles.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Articles } from "./articles.entity";
 
 @Entity("article_info")
 export class ArticleInfo {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("uuid")
+  article_id: string;
+
+  @Column("text", { array: true })
   titles: string[];
 
-  @Column()
+  @Column("text", { array: true })
   information: string[];
 
-  @ManyToOne(() => Article, (article) => article.articleInfo)
-  article: Article;
+  @ManyToOne(() => Articles, (article) => article.articleInfo)
+  @JoinColumn({ name: "article_id" })
+  article: Articles;
 }

@@ -3,13 +3,16 @@ import { User } from "./users.entity";
 
 @Entity("auth_token")
 export class AuthToken {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column("uuid")
+  user_id: string;
+
+  @Column("text")
   jwt_token: string;
 
-  @ManyToOne(() => User, (user) => user.authToken)
+  @ManyToOne(() => User, (user) => user.authTokens)
   @JoinColumn({ name: "user_id" })
   user: User;
 }
