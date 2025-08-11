@@ -18,6 +18,9 @@ export class User {
   @Column({ select: false })
   password_hash: string;
 
+  @Column("varchar", { length: 512 })
+  avatar: string;
+
   @OneToMany(() => Purchase, (purchase) => purchase.user)
   purchases: Purchase[];
 

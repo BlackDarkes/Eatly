@@ -1,1 +1,9 @@
-pre
+{
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "useTabs": true,
+  "semi": true,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "arrowParents": "avoid"
+}

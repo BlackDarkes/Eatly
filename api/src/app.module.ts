@@ -1,11 +1,22 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { DatabaseModule } from './database/database.module';
+import { Module } from "@nestjs/common";
+import { DatabaseModule } from "./database/database.module";
+import { UsersModule } from "./modules/users/users.module";
+import { SubscriptionModule } from "./modules/subscription/subscription.module";
+import { ArticlesModule } from "./modules/articles/articles.module";
+import { RestorantModule } from "./modules/restorant/restorant.module";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [
+		DatabaseModule,
+		UsersModule,
+		SubscriptionModule,
+		ArticlesModule,
+		RestorantModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "..", "public")
+    })
+	],
 })
 export class AppModule {}

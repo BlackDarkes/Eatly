@@ -12,12 +12,6 @@ export class Feedback {
   @Column("varchar", { length: 255 }) 
   type: string;
 
-  @Column("varchar", { length: 512 })
-  avatar: string;
-
-  @Column("varchar", { length: 255 })
-  fullname: string;
-
   @Column("varchar", { length: 255 })
   date: string;
 
