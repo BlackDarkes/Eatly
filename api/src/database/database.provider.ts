@@ -7,7 +7,7 @@ export const AppDataSource = new DataSource({
   host: process.env.DB_HOST || "localhost",
   port: parseInt(process.env.DB_PORT!) || 5432,
   database: process.env.DB_NAME || "eatly",
-  entities: [__dirname + "/../entities/*.entity.ts"],
+  entities: [__dirname + "/../entities/*/*.entity.ts"],
   migrations: [__dirname + "/../migrations/*.ts"],
   synchronize: true,
   logging: true,
