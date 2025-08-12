@@ -3,6 +3,7 @@ import { Purchase } from "./purchases.entity";
 import { AuthToken } from "./auth_token.entity";
 import { PurchasesHistory } from "./purchases_history.entity";
 import { Feedback } from "./feedback.entity";
+import { Articles } from "./articles.entity";
 
 @Entity("users")
 export class User {
@@ -32,4 +33,7 @@ export class User {
 
   @OneToMany(() => Feedback, (feedback) => feedback.user)
   feedbacks: Feedback[];
+
+  @OneToMany(() => Articles, (articles) => articles.user)
+  articles: Articles[];
 }

@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
 
 export const DatabaseSource = [
   {
-    provide: "DATABASE_SOURCE",
+    provide: "DATA_SOURCE",
     useFactory: async () => {
       return await AppDataSource.initialize();
     }

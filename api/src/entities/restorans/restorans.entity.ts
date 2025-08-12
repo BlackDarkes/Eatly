@@ -10,14 +10,17 @@ export class Restorans {
   @Column("varchar", { length: 512 })
   img: string;
 
+  @Column("text", { array: true })
+  category: string[]
+
   @Column("varchar", { length: 255 })
   type: string;
 
   @Column("varchar", { length: 255 })
   name: string;
 
-  @Column("varchar", { length: 255 })
-  time: string;
+  @Column("int")
+  time: number;
 
   @Column("decimal", { precision: 3, scale: 1 })
   stars: number;

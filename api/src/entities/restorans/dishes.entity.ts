@@ -19,11 +19,11 @@ export class Dishes {
   @Column("varchar", { length: 255 })
   name: string;
 
-  @Column("varchar", { length: 255 })
-  time: string;
+  @Column("int")
+  time: number;
 
-  @Column("varchar", { length: 255 })
-  price: string;
+  @Column("decimal", { precision: 3, scale: 2 })
+  price: number;
 
   @ManyToOne(() => Restorans, (restorans) => restorans.dishes)
   @JoinColumn({ name: "restoran_id" })
