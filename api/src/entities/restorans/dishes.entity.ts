@@ -22,7 +22,7 @@ export class Dishes {
   @Column("int")
   time: number;
 
-  @Column("decimal", { precision: 3, scale: 2 })
+  @Column("decimal", { precision: 6, scale: 2 })
   price: number;
 
   @ManyToOne(() => Restorans, (restorans) => restorans.dishes)
