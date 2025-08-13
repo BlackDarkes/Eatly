@@ -1,42 +1,48 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
-import { UsersService } from '../users/users.service';
-import { User } from 'src/entities/user/users.entity';
-import { Response } from 'express';
+import { UsersService } from "../user/users.service";
+import { UsersEntity } from "src/modules/user/entities/users.entity";
+import { Response } from "express";
+import { RegisterDto } from "./dto/register.dto";
+import { LoginDto } from "./dto/login.dto";
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
-  ) {}
+	constructor(
+		private usersService: UsersService,
+		private jwtService: JwtService,
+	) {}
 
-  async register(email: string, password: string): Promise<User> {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    return this.usersService.create({ email, password_hash: hashedPassword })
-  }
+	async register(dto: RegisterDto): Promise<UsersEntity> {
+		const { email, password } = dto;
+		const hashedPassword = await bcrypt.hash(password, 10);
 
-  async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findOne(email);
-    if (!user || !(await bcrypt.compare(password, user.password_hash))) {
-      throw new UnauthorizedException("Invalid email or password");
-    }
+		return this.usersService.create({ email, password_hash: hashedPassword });
+	}
 
-    return user;
-  }
+	async validateUser(dto: LoginDto): Promise<any> {
+		const { email, password } = dto;
+		const user = await this.usersService.findOne(email);
+		
+		if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+			throw new UnauthorizedException("Invalid email or password");
+		}
 
-  async login(user: any, res: Response) {
-    const payload = { email: user.email, sub: user.id };
-    const token = this.jwtService.sign(payload);
+		return user;
+	}
 
-    res.cookie("accept_token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_MODE === "production",
-      sameSite: "strict",
-      maxAge: 3600000, // 1 hour
-    })
+	async login(user: any, res: Response) {
+		const payload = { email: user.email, sub: user.id };
+		const token = this.jwtService.sign(payload);
 
-    return { accept_token: token }
-  }
+		res.cookie("accept_token", token, {
+			httpOnly: true,
+			secure: process.env.NODE_MODE === "production",
+			sameSite: "strict",
+			maxAge: 3600000, // 1 hour
+		});
+
+		return { accept_token: token };
+	}
 }

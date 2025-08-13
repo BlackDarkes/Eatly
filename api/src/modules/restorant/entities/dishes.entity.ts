@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Restorans } from "./restorans.entity";
 import { DishInfo } from "./dish_info.entity";
 
@@ -24,6 +24,12 @@ export class Dishes {
 
   @Column("decimal", { precision: 6, scale: 2 })
   price: number;
+
+  @CreateDateColumn()
+  create_at: Date;
+
+  @UpdateDateColumn()
+  updated_ad: Date;
 
   @ManyToOne(() => Restorans, (restorans) => restorans.dishes)
   @JoinColumn({ name: "restoran_id" })

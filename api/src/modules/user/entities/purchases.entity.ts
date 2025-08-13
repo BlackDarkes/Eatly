@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./users.entity";
+import { UsersEntity } from "./users.entity";
 
 @Entity("purchases")
-export class Purchase {
+export class PurchasesEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -12,7 +12,7 @@ export class Purchase {
   @Column("text", { array: true })
   product_ids: string[];
 
-  @ManyToOne(() => User, (user) => user.purchases)
+  @ManyToOne(() => UsersEntity, (usersEntity) => usersEntity.purchases)
   @JoinColumn({ name: "user_id" })
-  user: User;
+  user: UsersEntity;
 }

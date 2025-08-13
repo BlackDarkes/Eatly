@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Dishes } from "./dishes.entity";
 import { RestoranInfo } from "./restoran_info.entity";
 
@@ -24,6 +24,12 @@ export class Restorans {
 
   @Column("decimal", { precision: 3, scale: 1 })
   stars: number;
+
+  @CreateDateColumn()
+  create_at: Date;
+
+  @UpdateDateColumn()
+  updated_ad: Date;
 
   @OneToMany(() => Dishes, (dishes) => dishes.restorans)
   dishes: Dishes[];

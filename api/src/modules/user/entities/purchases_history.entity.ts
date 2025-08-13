@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./users.entity";
+import { UsersEntity } from "./users.entity";
 
 @Entity("purchases_history")
-export class PurchasesHistory {
+export class PurchasesHistoryEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -15,7 +15,7 @@ export class PurchasesHistory {
   @Column("varchar", { length: 255 })
   price: string;
 
-  @ManyToOne(() => User, (user) => user.purchasesHistory)
+  @ManyToOne(() => UsersEntity, (usersEntity) => usersEntity.purchasesHistory)
   @JoinColumn({ name: "user_id" })
-  user: User;
+  user: UsersEntity;
 }
