@@ -7,7 +7,7 @@ import { Repository } from "typeorm";
 export class UsersService {
 	constructor(
 		@InjectRepository(UsersEntity)
-		private readonly usersRepository: Repository<UsersEntity>
+		private readonly usersRepository: Repository<UsersEntity>,
 	) {}
 
 	async create(user: Partial<UsersEntity>): Promise<UsersEntity> {
@@ -16,7 +16,17 @@ export class UsersService {
 	}
 
 	async findOne(email: string): Promise<UsersEntity | null> {
-		return this.usersRepository.findOne({ where: { email } });
+		return await this.usersRepository.findOne({
+			where: { email },
+			select: [
+				"id",
+				"email",
+				"password_hash",
+				"avatar",
+				"create_at",
+				"updated_ad",
+			],
+		});
 	}
 
 	async findById(id: string): Promise<UsersEntity | null> {

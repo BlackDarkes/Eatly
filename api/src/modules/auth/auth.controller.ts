@@ -17,16 +17,20 @@ export class AuthController {
   @Post("login")
   async login(
     @Body() loginDto: LoginDto,
-    @Res() res: Response
+    @Res({ passthrough: true }) res: Response
   ) {
     const user = await this.authService.validateUser(loginDto);
     return this.authService.login(user, res);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post("logout")
   async logout(@Res() res: Response) {
-    res.clearCookie("accept_token");
-    return res.send({ status: "OK" })
+    res.clearCookie("access_token", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+
+    return res.status(200).json({ message: "Вы вышли из аккаунта!" })
   }
 }

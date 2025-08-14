@@ -17,9 +17,13 @@ export class AuthService {
 	async register(dto: RegisterDto): Promise<{ message: string }> {
 		const { email, password, fullname } = dto;
 		const hashedPassword = await bcrypt.hash(password, 10);
-		await this.usersService.create({ fullname, email, password_hash: hashedPassword });
+		await this.usersService.create({
+			fullname,
+			email,
+			password_hash: hashedPassword,
+		});
 
-		return { message: "Успешная регистрация!" }
+		return { message: "Успешная регистрация!" };
 	}
 
 	async validateUser(dto: LoginDto): Promise<any> {
@@ -37,13 +41,13 @@ export class AuthService {
 		const payload = { email: user.email, sub: user.id };
 		const token = this.jwtService.sign(payload);
 
-		res.cookie("accept_token", token, {
+		res.cookie("access_token", token, {
 			httpOnly: true,
-			secure: process.env.NODE_MODE === "production",
+			secure: false,
 			sameSite: "strict",
 			maxAge: 3600000, // 1 hour
 		});
 
-		return { accept_token: token };
+		return { message: "Вы успешно авторизовались!" };
 	}
 }
