@@ -10,9 +10,8 @@ export async function getTypeOrmConfig(configService: ConfigService): Promise<Ty
     username: configService.getOrThrow<string>("POSTGRES_USER"),
     password: configService.getOrThrow("POSTGRES_PASSWORD"),
     database: configService.getOrThrow("POSTGRES_DATABASE"),
-    entities: [join(__dirname, "/../modules/**/entities/*.entity.ts")],
-    migrations: [__dirname + "/../migrations/*.ts"],
-    synchronize: false,
+    autoLoadEntities: true,
+    synchronize: true,
     logging: true,
   }
 }

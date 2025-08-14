@@ -13,7 +13,6 @@ import { UsersEntity } from "../user/entities/users.entity";
 			secret: process.env.JWT_SECRET || "secret_key",
 			signOptions: { expiresIn: "1h" },
 		}),
-		TypeOrmModule.forFeature([UsersEntity]),
 		UsersModule,
 		PassportModule,
 	],

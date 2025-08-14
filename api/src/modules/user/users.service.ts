@@ -11,7 +11,8 @@ export class UsersService {
 	) {}
 
 	async create(user: Partial<UsersEntity>): Promise<UsersEntity> {
-		return this.usersRepository.create(user);
+		const newUser = this.usersRepository.create(user);
+		return this.usersRepository.save(newUser);
 	}
 
 	async findOne(email: string): Promise<UsersEntity | null> {

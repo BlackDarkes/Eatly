@@ -8,11 +8,11 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from "typeorm";
-import { ArticleInfo } from "./article_info.entity";
+import { ArticleInfoEntity } from "./article_info.entity";
 import { UsersEntity } from "src/modules/user/entities/users.entity";
 
 @Entity("articles")
-export class Articles {
+export class ArticlesEntity {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
@@ -34,8 +34,8 @@ export class Articles {
 	@UpdateDateColumn()
 	updated_ad: Date;
 
-	@OneToMany(() => ArticleInfo, (articleInfo) => articleInfo.article)
-	articleInfo: ArticleInfo[];
+	@OneToMany(() => ArticleInfoEntity, (articleInfoEntity) => articleInfoEntity.article)
+	articleInfo: ArticleInfoEntity[];
 
 	@ManyToOne(() => UsersEntity, (usersEntity) => usersEntity.articles)
 	@JoinColumn({ name: "user_id" })

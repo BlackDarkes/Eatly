@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Articles } from "./articles.entity";
+import { ArticlesEntity } from "./articles.entity";
 
 @Entity("article_info")
-export class ArticleInfo {
+export class ArticleInfoEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -18,7 +18,7 @@ export class ArticleInfo {
   @Column("text", { nullable: true, array: true })
   more_info: string[];
 
-  @ManyToOne(() => Articles, (article) => article.articleInfo)
+  @ManyToOne(() => ArticlesEntity, (articleEntity) => articleEntity.articleInfo)
   @JoinColumn({ name: "article_id" })
-  article: Articles;
+  article: ArticlesEntity;
 }

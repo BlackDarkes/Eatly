@@ -14,17 +14,18 @@ export class AuthService {
 		private jwtService: JwtService,
 	) {}
 
-	async register(dto: RegisterDto): Promise<UsersEntity> {
-		const { email, password } = dto;
+	async register(dto: RegisterDto): Promise<{ message: string }> {
+		const { email, password, fullname } = dto;
 		const hashedPassword = await bcrypt.hash(password, 10);
+		await this.usersService.create({ fullname, email, password_hash: hashedPassword });
 
-		return this.usersService.create({ email, password_hash: hashedPassword });
+		return { message: "Успешная регистрация!" }
 	}
 
 	async validateUser(dto: LoginDto): Promise<any> {
 		const { email, password } = dto;
 		const user = await this.usersService.findOne(email);
-		
+
 		if (!user || !(await bcrypt.compare(password, user.password_hash))) {
 			throw new UnauthorizedException("Invalid email or password");
 		}
