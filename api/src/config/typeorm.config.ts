@@ -1,6 +1,5 @@
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-import { join } from "path";
 
 export async function getTypeOrmConfig(configService: ConfigService): Promise<TypeOrmModuleOptions> {
   return {
@@ -10,8 +9,9 @@ export async function getTypeOrmConfig(configService: ConfigService): Promise<Ty
     username: configService.getOrThrow<string>("POSTGRES_USER"),
     password: configService.getOrThrow("POSTGRES_PASSWORD"),
     database: configService.getOrThrow("POSTGRES_DATABASE"),
-    autoLoadEntities: true,
-    synchronize: true,
+    entities: ["dist/modules/**/entities/*.entity.{ts,js}"],
+    migrations: ["dist/migrations/*.{ts,js}"],
+    synchronize: false,
     logging: true,
   }
 }

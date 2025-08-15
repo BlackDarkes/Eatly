@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { UsersService } from "./users.service";
-import { UsersController } from "./users.controller";
+import { UserService } from "./users.service";
+import { UserController } from "./users.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { UsersEntity } from "./entities/users.entity";
 import { PurchasesEntity } from "./entities/purchases.entity";
@@ -20,8 +20,8 @@ import { ArticleInfoEntity } from "../article/entities/article_info.entity";
 			ArticleInfoEntity,
 		]),
 	],
-	controllers: [UsersController],
-	providers: [UsersService],
-	exports: [UsersService],
+	controllers: [UserController],
+	providers: [UserService],
+	exports: [UserService],
 })
 export class UsersModule {}
