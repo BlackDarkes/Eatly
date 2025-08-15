@@ -48,6 +48,6 @@ export class AuthService {
 			maxAge: 3600000, // 1 hour
 		});
 
-		return { message: "Вы успешно авторизовались!" };
+		return { message: "Вы успешно авторизовались!", token };
 	}
 }

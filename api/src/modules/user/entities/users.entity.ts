@@ -2,7 +2,7 @@ import { Entity, Column, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, Up
 import { PurchasesEntity } from "./purchases.entity";
 import { PurchasesHistoryEntity } from "./purchases_history.entity";
 import { FeedbackEntity } from "./feedback.entity";
-import { ArticlesEntity } from "src/modules/article/entities/articles.entity";
+import { ArticlesEntity } from "../../article/entities/articles.entity";
 
 @Entity("users")
 export class UsersEntity {
@@ -18,7 +18,7 @@ export class UsersEntity {
 	@Column({ select: false })
 	password_hash: string;
 
-	@Column("varchar", { length: 512, nullable: true, default: "/uploading/users/avatars/" })
+	@Column("varchar", { length: 512, nullable: true, default: null })
 	avatar?: string | null;
 
 	@CreateDateColumn()

@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Dishes } from "./dishes.entity";
+import { DishesEntity } from "./dishes.entity";
 
 @Entity("dish_info")
-export class DishInfo {
+export class DishInfoEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -15,7 +15,7 @@ export class DishInfo {
   @Column("text")
   description: string
 
-  @ManyToOne(() => Dishes, (dishes) => dishes.dishInfo)
+  @ManyToOne(() => DishesEntity, (dishesEntity) => dishesEntity.dishInfo)
   @JoinColumn({ name: "dishes_id" })
-  dishes: Dishes;
+  dishes: DishesEntity;
 }

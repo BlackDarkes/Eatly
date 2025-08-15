@@ -1,9 +1,9 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Dishes } from "./dishes.entity";
-import { RestoranInfo } from "./restoran_info.entity";
+import { DishesEntity } from "./dishes.entity";
+import { RestoranInfoEntity } from "./restoran_info.entity";
 
 @Entity("restorans")
-export class Restorans {
+export class RestoransEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -31,9 +31,9 @@ export class Restorans {
   @UpdateDateColumn()
   updated_ad: Date;
 
-  @OneToMany(() => Dishes, (dishes) => dishes.restorans)
-  dishes: Dishes[];
+  @OneToMany(() => DishesEntity, (dishesEntity) => dishesEntity.restorans)
+  dishes: DishesEntity[];
 
-  @OneToMany(() => RestoranInfo, (restoransInfo) => restoransInfo.restorans)
-  restoransInfo: RestoranInfo[];
+  @OneToMany(() => RestoranInfoEntity, (restoransInfoEntity) => restoransInfoEntity.restorans)
+  restoransInfo: RestoranInfoEntity[];
 }

@@ -1,9 +1,9 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Restorans } from "./restorans.entity";
-import { DishInfo } from "./dish_info.entity";
+import { RestoransEntity } from "./restorans.entity";
+import { DishInfoEntity } from "./dish_info.entity";
 
 @Entity("dishes")
-export class Dishes {
+export class DishesEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -31,10 +31,10 @@ export class Dishes {
   @UpdateDateColumn()
   updated_ad: Date;
 
-  @ManyToOne(() => Restorans, (restorans) => restorans.dishes)
+  @ManyToOne(() => RestoransEntity, (restoransEntity) => restoransEntity.dishes)
   @JoinColumn({ name: "restoran_id" })
-  restorans: Restorans;
+  restorans: RestoransEntity;
 
-  @OneToMany(() => DishInfo, (dishInfo) => dishInfo.dishes)
-  dishInfo: DishInfo;
+  @OneToMany(() => DishInfoEntity, (dishInfoEntity) => dishInfoEntity.dishes)
+  dishInfo: DishInfoEntity;
 }

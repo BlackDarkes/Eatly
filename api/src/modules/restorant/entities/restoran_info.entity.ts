@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Restorans } from "./restorans.entity";
+import { RestoransEntity } from "./restorans.entity";
 
 @Entity("restoran_info")
-export class RestoranInfo {
+export class RestoranInfoEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -12,7 +12,7 @@ export class RestoranInfo {
   @Column("varchar", { length: 512 })
   img: string;
 
-  @ManyToOne(() => Restorans, (restorans) => restorans.restoransInfo)
+  @ManyToOne(() => RestoransEntity, (restoransEntity) => restoransEntity.restoransInfo)
   @JoinColumn({ name: "restoran_id" })
-  restorans: Restorans;
+  restorans: RestoransEntity;
 }
