@@ -10,6 +10,7 @@ import { join } from "path";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { getTypeOrmConfig } from "./config/typeorm.config";
 import { SupportModule } from './modules/support/support.module';
+import { DishModule } from './modules/dish/dish.module';
 
 @Module({
 	imports: [
@@ -30,6 +31,7 @@ import { SupportModule } from './modules/support/support.module';
 		RestorantModule,
 		AuthModule,
 		SupportModule,
+		DishModule,
 	],
 })
 export class AppModule {}
