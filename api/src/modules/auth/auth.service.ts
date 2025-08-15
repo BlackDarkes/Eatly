@@ -17,6 +17,12 @@ export class AuthService {
 	async register(dto: RegisterDto): Promise<{ message: string }> {
 		const { email, password, fullname } = dto;
 		const hashedPassword = await bcrypt.hash(password, 10);
+		const user = await this.usersService.findOne(email);
+
+		if (user) {
+			throw new UnauthorizedException("Данная почта уже занята!");
+		}
+
 		await this.usersService.create({
 			fullname,
 			email,
