@@ -9,6 +9,9 @@ export class ArticleInfoEntity {
   @Column("uuid")
   article_id: string;
 
+  @Column({ type: "varchar", length: 255, default: null })
+  main_image: string;
+
   @Column("text", { array: true })
   titles: string[];
 
