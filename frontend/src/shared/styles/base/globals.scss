@@ -1,0 +1,22 @@
+button, label {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  color: inherit;
+  border: 0;
+  outline: 0;
+  transition: $transition;
+}

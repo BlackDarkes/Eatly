@@ -1,6 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
+import { fileURLToPath } from "url";
+import { resolve, dirname } from "path";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,7 +14,7 @@ export default defineConfig({
     open: true,
     hmr: true,
     cors: true,
-    host: "0.0.0.0"
+    host: "0.0.0.0",
   },
   preview: {
     port: 3000,
@@ -19,18 +23,19 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @use ;
-        `
-      }
-    }
+          @use "/src/shared/styles/helpers/index.scss" as *;
+          @use "/src/shared/styles/base/variables.scss" as *;
+        `,
+      },
+    },
   },
   resolve: {
     alias: {
-      "@app/*": "src/app/*",
-      "@pages/*": "src/pages/*",
-      "@widgets/*": "src/widgets/*",
-      "@features/*": "src/features/*",
-      "@shared/*": "src/shared/*",
-    }
-  }
-})
+      "@app": resolve(__dirname, "./src/app/"),
+      "@pages": resolve(__dirname, "./src/pages/"),
+      "@widgets": resolve(__dirname, "./src/widgets/"),
+      "@features": resolve(__dirname, "./src/features/"),
+      "@shared": resolve(__dirname, "./src/shared/"),
+    },
+  },
+});
