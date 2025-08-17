@@ -1,0 +1,1 @@
+export const NAVIGATION_POINTS = ["Menu", "Blog", "Pricing", "Contact"]

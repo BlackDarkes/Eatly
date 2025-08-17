@@ -1,0 +1,16 @@
+.header {
+  font-family: $inter;
+  padding-block: rem(47) rem(25);
+
+  &Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &Nav {
+    display: flex;
+    align-items: center;
+    column-gap: rem(100);
+  }
+}

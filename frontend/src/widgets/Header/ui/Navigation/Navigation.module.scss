@@ -1,0 +1,6 @@
+.list {
+  @include fluid-text(18, 16);
+  display: flex;
+  column-gap: rem(54);
+  color: $mainGray;
+}
