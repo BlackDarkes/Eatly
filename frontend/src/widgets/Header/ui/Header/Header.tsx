@@ -6,6 +6,7 @@ import { Burger } from "../../../burger/ui/Burger/Burger";
 import LogoImage from "/logo.svg";
 import styles from './Header.module.scss'
 import { useState } from "react";
+import { AuthForms } from "@widgets/authForms";
 
 interface IHeaderProps {
   page: string
@@ -45,6 +46,8 @@ export const Header = ({ page }: IHeaderProps) => {
         <AuthButtons onLogin={onLogin} className={styles.headerAuthButtons} onRegister={onRegister} />
 
         <Burger isOpen={isOpen} handleOpen={handleOpen} onLogin={onLogin} onRegister={onRegister} />
+
+        <AuthForms />
       </Container>
     </header>
   );

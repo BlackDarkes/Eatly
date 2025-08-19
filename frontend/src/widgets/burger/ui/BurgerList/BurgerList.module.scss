@@ -12,8 +12,9 @@
   &List {
     display: flex;
     flex-direction: column;
-    row-gap: rem(20);
-    margin-bottom: rem(30);
+    align-items: flex-start;
+    row-gap: rem(30);
+    margin-bottom: rem(50);
     font-size: rem(24);
   }
   
