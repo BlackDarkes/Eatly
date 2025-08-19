@@ -13,7 +13,7 @@ export const Navigation = ({ page, className }: INavigationProps) => {
       {NAVIGATION_POINTS.map((point) => {
         return (
           <li key={point}>
-            <Link to={`/${point.toLowerCase()}`} className={`${page === point ? "" : ""}`}>
+            <Link to={`/${point.toLowerCase()}`} className={`${styles.listLink} ${page === point ? styles.listPage : ""}`}>
               {point}
             </Link>
           </li>

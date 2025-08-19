@@ -20,3 +20,7 @@ button {
   outline: 0;
   transition: $transition;
 }
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}

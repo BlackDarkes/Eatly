@@ -9,7 +9,7 @@ interface IAuthButtonsProps {
   
 export const AuthButtons = ({ onLogin, onRegister, className }: IAuthButtonsProps) => {
   return (
-    <div className={`${className ? className : ""} ${styles.authButtonsContainer}`}>
+    <div className={`${styles.authButtonsContainer} ${className ? className : ""}`}>
       <Button onClick={() => onLogin()} className={styles.authButtonsContainerButton}>Login</Button>
       <Button onClick={() => onRegister()} className={styles.authButtonsContainerButton}>Sign up</Button>
     </div>

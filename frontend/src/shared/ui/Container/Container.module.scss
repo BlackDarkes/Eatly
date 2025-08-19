@@ -1,4 +1,4 @@
 .container {
   margin-inline: auto;
-  width: min(100%, rem($mainWidthContainer));
+  width: min(100% - rem(20), rem($mainWidthContainer));
 }

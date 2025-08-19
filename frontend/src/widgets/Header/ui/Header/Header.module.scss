@@ -1,16 +1,47 @@
 .header {
   font-family: $inter;
-  padding-block: rem(47) rem(25);
 
   &Container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-block: rem(47) rem(25);
+    border-bottom: rem(1) solid $secondaryGray;
+
+    @include tablet() {
+      padding-block: rem(25);
+    }
+  }
+
+  &Logo {
+    display: flex;
+    align-items: center;
+    column-gap: rem(11);
+    font-size: rem(21);
+    font-family: $poppins;
+    font-weight: 600;
+    color: $mainPurple;
+  }
+
+  &LogoLink {
+    @include focus();
   }
 
   &Nav {
     display: flex;
     align-items: center;
     column-gap: rem(100);
+  }
+
+  &List {
+    @include tablet() {
+      display: none;
+    }
+  }
+
+  &AuthButtons {
+    @include tablet() {
+      display: none;
+    }
   }
 }
