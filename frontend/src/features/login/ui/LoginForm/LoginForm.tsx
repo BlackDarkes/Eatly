@@ -3,6 +3,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import IconPassword from "../../assets/password.svg?react";
 import { useLogin } from "@features/login/api/useLogin";
 import type { ILogin } from "@shared/types";
+
 export const LoginForm = () => {
   const { handleType } = useStore();
   const [typePassword, setTypePassword] = useState("password");
@@ -37,12 +38,11 @@ export const LoginForm = () => {
       return alert("Введите данные!");
     }
 
-    mutate(user)
+    mutate(user);
   }
 
   if (data) {
     alert(data.message);
-    console.log(data.token)
   }
 
   return (

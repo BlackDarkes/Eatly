@@ -1,13 +1,17 @@
-import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { UserService } from '../user/users.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UserService,
+  ) {}
 
   @Post("register")
   async register(@Body() registerDto: RegisterDto) {
@@ -23,6 +27,12 @@ export class AuthController {
     return this.authService.login(user, res);
   }
 
+  @Post("me")
+  @UseGuards(JwtAuthGuard)
+  async getMe(@Req() req: Request) {
+     const user = await this.usersService.findById(req.user?.sub);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Post("logout")
   async logout(@Res() res: Response) {
@@ -33,5 +43,24 @@ export class AuthController {
     });
 
     return res.status(200).json({ message: "Вы вышли из аккаунта!" })
+  }
+
+  @Post("refresh")
+  @HttpCode(200)
+  async refreshToken(@Req() req: Request, @Res() res: Response) {
+    const refreshToken = req.cookies?.refresh_token;
+
+    if (!refreshToken) {
+      throw new UnauthorizedException('Refresh token not found');
+    }
+
+    try {
+      const result = await this.authService.refreshToken(refreshToken, res);
+      return result;
+    } catch(error) {
+      res.clearCookie("access_token");
+      res.clearCookie("refresh_token");
+      throw new UnauthorizedException('Failed to refresh tokens');
+    }
   }
 }

@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import IconApple from "../../assets/icons/Apple_logo_black 1.svg?react";
 
 export const AuthForms = () => {
-  const { type } = useStore();
+  const { type, user } = useStore();
   const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -24,13 +24,15 @@ export const AuthForms = () => {
     document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [])
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   if (!modalRoot) {
     return null;
   }
+
+  console.log(user)
 
   return createPortal(
     <>
@@ -48,16 +50,21 @@ export const AuthForms = () => {
           <p>OR</p>
         </div>
 
-        <div>
-          { type === "login" ? <LoginForm /> : <RegisterForm /> }
-        </div>
+        <div>{type === "login" ? <LoginForm /> : <RegisterForm />}</div>
       </div>
 
       <div>
         <Link to={"/"}>Privacy Policy</Link>
         <p>Copyright 2022</p>
       </div>
+
+      <h2>user</h2>
+      <div>
+        <h1>{user?.fullname}</h1>
+        <p>{user?.email}</p>
+        <img src={`${import.meta.env.VITE_API_URL}/${user?.avatar}`} alt="" />
+      </div>
     </>,
     modalRoot
   );
-}
+};

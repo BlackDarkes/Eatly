@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface IStore {
-  user: { id: number; email: string; fullname: string } | null;
+  user: { id: number; email: string; fullname: string; avatar: string } | null;
   isAuthenticated: boolean;
   setUser: (user: IStore['user']) => void;
   type: "login" | "register" | null;
