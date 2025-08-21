@@ -1,6 +1,7 @@
-import { ExecutionContext, Injectable } from "@nestjs/common";
+import { ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { Observable } from "rxjs";
+import { IJwtPayload } from "src/types/jwtPayload.interface";
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard("jwt") {
@@ -9,10 +10,22 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 	): boolean | Promise<boolean> | Observable<boolean> {
 		const request = context.switchToHttp().getRequest();
 
-		if (request.user) {
-			return true;
+		const token = request.cookies?.access_token;
+
+		if (!token) {
+			throw new UnauthorizedException('No token provided');
 		}
 
+		request.headers.authorization = `Bearer ${token}`
+
 		return super.canActivate(context);
+	}
+
+	handleRequest<TUser = IJwtPayload>(err: any, user: any, info: any, context: ExecutionContext, status?: any): TUser {
+		if (err || !user) {
+			throw new UnauthorizedException('Invalid token');
+		}
+
+		return user as TUser;
 	}
 }

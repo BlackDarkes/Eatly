@@ -41,10 +41,11 @@ export const addAuthInterceptor = () => {
           return baseApi(originalRequest);
         } catch (refreshError) {
           processQueue(refreshError);
-          
-          if (window.location.pathname !== '/login') {
-            window.location.href = '/login';
-          }
+
+          /* ДЕЛАЕТ РЕДИРЕКТ ЕСЛИ ТОКЕНА НЕТ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+          // if (window.location.pathname !== '/login') {
+          //   window.location.href = '/login';
+          // }
           
           return Promise.reject(refreshError);
         } finally {

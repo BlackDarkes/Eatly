@@ -1,17 +1,14 @@
-import { Body, Controller, HttpCode, Post, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Request, Response } from 'express';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { UserService } from '../user/users.service';
+import { IJwtPayload } from 'src/types/jwtPayload.interface';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly usersService: UserService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post("register")
   async register(@Body() registerDto: RegisterDto) {
@@ -27,10 +24,10 @@ export class AuthController {
     return this.authService.login(user, res);
   }
 
-  @Post("me")
+  @Get("me")
   @UseGuards(JwtAuthGuard)
-  async getMe(@Req() req: Request) {
-     const user = await this.usersService.findById(req.user?.sub);
+  async getMe(@Req() req: Request & { user: IJwtPayload }) {
+    return this.authService.getCurrentUser(req.user?.sub)
   }
 
   @UseGuards(JwtAuthGuard)
@@ -41,6 +38,11 @@ export class AuthController {
       secure: false,
       sameSite: "strict",
     });
+    res.clearCookie("refresh_token", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    })
 
     return res.status(200).json({ message: "Вы вышли из аккаунта!" })
   }

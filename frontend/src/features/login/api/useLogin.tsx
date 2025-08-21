@@ -1,16 +1,15 @@
 import { useStore } from "@app/store/store";
+import { baseApi } from "@shared/api";
 import type { ILogin } from "@shared/types";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 
-// useLogin.ts
 export const useLogin = () => {
   const { setUser } = useStore();
 
   const mutation = useMutation({
     mutationFn: async (user: ILogin) => {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
+      const response = await baseApi.post(
+        "/auth/login",
         user,
         {
           withCredentials: true,

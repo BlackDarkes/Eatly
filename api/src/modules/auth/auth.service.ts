@@ -45,14 +45,28 @@ export class AuthService {
 
 	async login(user: UsersEntity, res: Response) {
 		const payload = { email: user.email, sub: user.id };
-		const token = this.jwtService.sign(payload);
 
-		res.cookie("access_token", token, {
+		const accessToken = this.jwtService.sign(payload, {
+			expiresIn: '1h'
+		});
+
+		const refreshToken = this.jwtService.sign(payload, {
+			expiresIn: "7d"
+		})
+
+		res.cookie("access_token", accessToken, {
 			httpOnly: true,
 			secure: false,
 			sameSite: "strict",
-			maxAge: 3600000, // 1 hour
+			maxAge: 3_600_000, // 1 hour
 		});
+
+		res.cookie("refresh_token", refreshToken, {
+			httpOnly: true,
+			secure: false,
+			sameSite: "strict",
+			maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+		})
 
 		const userDb = await this.usersService.findById(user.id);
 
@@ -64,6 +78,21 @@ export class AuthService {
         fullname: userDb?.fullname,
 				avatar: userDb?.avatar,
       }
+		};
+	}
+
+	async getCurrentUser(userID: string) {
+		const user = await this.usersService.findById(userID);
+
+		if (!user) {
+			throw new UnauthorizedException('User not found');
+		}
+
+		return {
+			id: user.id,
+			email: user.email,
+			fullname: user.fullname,
+			avatar: user.avatar,
 		};
 	}
 

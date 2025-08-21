@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import IconApple from "../../assets/icons/Apple_logo_black 1.svg?react";
 
 export const AuthForms = () => {
-  const { type, user } = useStore();
+  const { type, user, isAuthenticated, logout } = useStore();
   const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -32,38 +32,50 @@ export const AuthForms = () => {
     return null;
   }
 
-  console.log(user)
+  console.log(user);
 
   return createPortal(
     <>
-      <div>
-        <div>
-          <h2>Sign Up To eatly</h2>
-
+      {isAuthenticated ? (
+        <>
+          <h2>user</h2>
           <div>
-            <button type="button">G</button>
-            <button type="button">
-              <IconApple />
-            </button>
+            <h1>{user?.fullname}</h1>
+            <p>{user?.email}</p>
+            <img
+              src={`${import.meta.env.VITE_API_URL}/${user?.avatar}`}
+              alt=""
+            />
+          </div>
+          <button type="button" onClick={() => logout()}>
+            logout
+          </button>
+        </>
+      ) : (
+        <>
+          <div>
+            <div>
+              <h2>Sign Up To eatly</h2>
+
+              <div>
+                <button type="button">G</button>
+                <button type="button">
+                  <IconApple />
+                </button>
+              </div>
+
+              <p>OR</p>
+            </div>
+
+            <div>{type === "login" ? <LoginForm /> : <RegisterForm />}</div>
           </div>
 
-          <p>OR</p>
-        </div>
-
-        <div>{type === "login" ? <LoginForm /> : <RegisterForm />}</div>
-      </div>
-
-      <div>
-        <Link to={"/"}>Privacy Policy</Link>
-        <p>Copyright 2022</p>
-      </div>
-
-      <h2>user</h2>
-      <div>
-        <h1>{user?.fullname}</h1>
-        <p>{user?.email}</p>
-        <img src={`${import.meta.env.VITE_API_URL}/${user?.avatar}`} alt="" />
-      </div>
+          <div>
+            <Link to={"/"}>Privacy Policy</Link>
+            <p>Copyright 2022</p>
+          </div>
+        </>
+      )}
     </>,
     modalRoot
   );

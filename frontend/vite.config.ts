@@ -15,6 +15,13 @@ export default defineConfig({
     hmr: true,
     cors: true,
     host: "0.0.0.0",
+    proxy: {
+      "/api": {
+        target: "http://192.168.0.104:8000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, "")
+      }
+    }
   },
   preview: {
     port: 3000,
