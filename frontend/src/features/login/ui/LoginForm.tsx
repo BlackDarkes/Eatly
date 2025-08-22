@@ -5,6 +5,7 @@ import { Button } from "@shared/ui/Button/Button";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import IconPassword from "../assets/password.svg?react";
 import styles from "./LoginForm.module.scss";
+import {  useNavigate } from "react-router";
 
 export const LoginForm = () => {
   const [hide, setHide] = useState<boolean>(false);
@@ -13,9 +14,11 @@ export const LoginForm = () => {
     register,
     watch,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ILogin>();
   const { mutate } = useLogin();
+  const navigate = useNavigate();
 
   const handlePasswordType = () => {
     setTypePassword((prevType) =>
@@ -25,7 +28,12 @@ export const LoginForm = () => {
   };
 
   const onSubmit: SubmitHandler<ILogin> = (data) => {
-    mutate(data);
+    mutate(data, {
+      onSuccess: () => {
+        reset();
+        navigate("/");
+      }
+    });
   };
 
   return (
@@ -93,9 +101,9 @@ export const LoginForm = () => {
         </div>
       </div>
       <div>
-        <Button className={styles.loginFormLoginButton}>
+        <button type="submit" className={styles.loginFormLoginButton}>
           SING IN
-        </Button>
+        </button>
         <p className={styles.loginFormSingUp}>
           Create A New Account?{" "}
           <Button

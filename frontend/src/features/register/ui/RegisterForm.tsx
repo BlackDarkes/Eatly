@@ -5,7 +5,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import IconPassword from "../assets/password.svg?react";
 import styles from "./RegisterForm.module.scss";
 import { Button } from "@shared/ui/Button/Button";
-import { useStore } from "@app/store/store";
+import { useNavigate } from "react-router";
 
 export const RegisterForm = () => {
   const [hide, setHide] = useState<boolean>(false);
@@ -15,10 +15,10 @@ export const RegisterForm = () => {
     watch,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<IRegister>();
   const { mutate } = useRegister();
-  const { handleType } = useStore()
+  const navigate = useNavigate();
 
   const handlePasswordType = () => {
     setTypePassword((prevType) =>
@@ -28,9 +28,12 @@ export const RegisterForm = () => {
   };
 
   const onSubmit: SubmitHandler<IRegister> = (data) => {
-    mutate(data);
-    reset();
-    handleType("login");
+    mutate(data, {
+      onSuccess: () => {
+        reset();
+        navigate("../login");
+      },
+    });
   };
 
   return (
@@ -115,10 +118,7 @@ export const RegisterForm = () => {
         </Button>
         <p className={styles.registerFormSingUp}>
           Already Have An Account?{" "}
-          <Button
-            link="../login"
-            className={styles.registerFormSingUpLink}
-          >
+          <Button link="../login" className={styles.registerFormSingUpLink}>
             Log In
           </Button>
         </p>

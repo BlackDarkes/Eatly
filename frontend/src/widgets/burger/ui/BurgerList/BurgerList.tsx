@@ -4,15 +4,19 @@ import { AuthButtons } from "@widgets/header/ui/AuthButtons/AuthButtons";
 
 interface IBurgerListProps {
   isOpen: boolean;
-  onLogin: () => void;
-  onRegister: () => void;
+  isAuthenticated: boolean;
+  logout: () => void;
 }
   
-export const BurgerList = ({ isOpen, onLogin, onRegister }: IBurgerListProps) => {
+export const BurgerList = ({ isOpen, isAuthenticated, logout }: IBurgerListProps) => {
   return (
     <div className={`${isOpen ? styles.burgerActive : ""} ${styles.burger}`}>
       <Navigation page="home" className={styles.burgerList} />
-      <AuthButtons onLogin={onLogin} className={styles.burgerButtons} onRegister={onRegister} />
+      {isAuthenticated ? (
+        <button type="button" onClick={() => {logout(); location.reload()}}>logout</button>
+      ) : (
+        <AuthButtons className={styles.burgerButtons} />
+      ) }
     </div>
   );
 }

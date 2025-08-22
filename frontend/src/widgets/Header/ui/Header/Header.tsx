@@ -9,25 +9,15 @@ import { useState } from "react";
 import { useStore } from "@app/store/store";
 
 interface IHeaderProps {
-  page: string
+  page: string;
 }
   
 export const Header = ({ page }: IHeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { handleType } = useStore();
+  const { isAuthenticated, logout } = useStore();
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
-  }
-
-  const onLogin = () => {
-    handleType("login")
-    setIsOpen(false);
-  }
-
-  const onRegister = () => {
-    handleType("register")
-    setIsOpen(false);
   }
 
   return (
@@ -46,9 +36,13 @@ export const Header = ({ page }: IHeaderProps) => {
           </nav>
         </div>
 
-        <AuthButtons className={styles.headerAuthButtons} />
+        { isAuthenticated ? (
+          <button type="button" onClick={() => {logout(); location.reload()}} className={styles.logout}>Logout</button>
+        ) : (
+          <AuthButtons className={styles.headerAuthButtons} />
+        ) }
 
-        <Burger isOpen={isOpen} handleOpen={handleOpen} onLogin={onLogin} onRegister={onRegister} />
+        <Burger isOpen={isOpen} handleOpen={handleOpen}/>
       </Container>
     </header>
   );

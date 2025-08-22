@@ -41,3 +41,10 @@
     }
   }
 }
+
+
+.logout {
+  @include tablet() {
+    display: none;
+  }
+}
