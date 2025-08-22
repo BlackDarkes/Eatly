@@ -44,6 +44,9 @@ export class AuthService {
 	}
 
 	async login(user: UsersEntity, res: Response) {
+		res.clearCookie("access_token");
+  	res.clearCookie("refresh_token");
+
 		const payload = { email: user.email, sub: user.id };
 
 		const accessToken = this.jwtService.sign(payload, {

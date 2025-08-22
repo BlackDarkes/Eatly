@@ -5,9 +5,12 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./routers/queryRouter";
 import { useStore } from "./store/store";
 import { useEffect } from "react";
+import { useTokenRefresh } from "@shared/hooks/useTokenRefresh";
 
 function App() {
   const { checkAuth } = useStore();
+  
+  useTokenRefresh();
 
   useEffect(() => {
     checkAuth();

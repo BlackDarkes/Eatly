@@ -1,0 +1,84 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(20);
+  width: min(100%, rem(380));
+  font-family: $poppins;
+
+  &ContainerInput {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &ContainerPassword {
+    position: relative;
+  }
+
+  &Hide {
+    position: absolute;
+    top: calc(50% - rem(13)); 
+    right: rem(25);
+    width: rem(20);
+    height: rem(20);
+
+    &Show {
+      color: $mainPurple;
+    }
+  }
+
+  &Input {
+    padding: rem(24);
+    border-radius: rem(14);
+    background-color: $lightGray;
+    border-color: transparent;
+    font-size: rem(17);
+    font-weight: 500;
+    transition: $transition;
+
+    &Password {
+      display: flex;
+      flex-direction: column;
+      margin-top: rem(25);
+      width: 100%;
+    }
+
+    &Text {
+      background-color: transparent;
+      border-color: $mainPurple;
+      color: $mainPurple;
+    }
+  }
+
+  &Error {
+    color: $secondaryRed;
+  }
+
+  &Forget {
+    margin-top: rem(10);
+    color: $mainPurple;
+    text-align: end;
+    width: 100%;
+  }
+
+  &LoginButton {
+    padding-block: rem(24);
+    width: 100%;
+    background-color: $mainPurple;
+    color: $mainWhite;
+    border-radius: rem(15);
+
+    @include hover() {
+      opacity: 0.8;
+    }
+  }
+
+  &SingUp {
+    @include fluid-text(19, 16);
+    margin-top: rem(20);
+    
+    &Link {
+      color: $mainPurple;
+      font-weight: 700;
+    }
+  }
+}

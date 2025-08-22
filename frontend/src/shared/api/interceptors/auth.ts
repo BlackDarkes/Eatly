@@ -1,59 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // shared/api/interceptors/auth.ts
 // shared/api/interceptors/auth.ts
-import { baseApi } from '../api-instance';
-
-let isRefreshing = false;
-let failedQueue: Array<{ resolve: (value: any) => void; reject: (error: any) => void }> = [];
-
-const processQueue = (error: any = null) => {
-  failedQueue.forEach((prom) => {
-    if (error) {
-      prom.reject(error);
-    } else {
-      prom.resolve(baseApi);
-    }
-  });
-  failedQueue = [];
-};
+import { useStore } from '@app/store/store';
+import { baseApi, refreshApi } from '../api-instance';
 
 export const addAuthInterceptor = () => {
   baseApi.interceptors.response.use(
     (response) => response,
     async (error) => {
+      // 🔥 Проверяем что это не сетьевая ошибка
+      if (error.code === 'ECONNABORTED' || !error.response) {
+        return Promise.reject(error);
+      }
+
       const originalRequest = error.config;
 
-      if (error.response?.status === 401 && !originalRequest._retry && originalRequest.url !== '/auth/refresh') {
-        if (isRefreshing) {
-          return new Promise((resolve, reject) => {
-            failedQueue.push({ resolve, reject });
-          })
-            .then(() => baseApi(originalRequest))
-            .catch((err) => Promise.reject(err));
-        }
+      if (error.response?.status === 401 && 
+          !originalRequest._retry && 
+          originalRequest.url !== '/auth/refresh') {
 
         originalRequest._retry = true;
-        isRefreshing = true;
 
         try {
-          await baseApi.post('/auth/refresh');
-          processQueue();
+          console.log('🔄 Attempting token refresh via interceptor...');
+          await refreshApi.post('/auth/refresh');
+          console.log('✅ Refresh successful');
           return baseApi(originalRequest);
-        } catch (refreshError) {
-          processQueue(refreshError);
-
-          /* ДЕЛАЕТ РЕДИРЕКТ ЕСЛИ ТОКЕНА НЕТ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-          // if (window.location.pathname !== '/login') {
-          //   window.location.href = '/login';
-          // }
+        } catch (refreshError: any) {
+          console.log('❌ Refresh failed:', refreshError.message);
+          
+          // 🔥 Очищаем состояние только при реальной ошибке авторизации
+          if (refreshError.response?.status === 401) {
+            useStore.getState().clearAuth();
+          }
           
           return Promise.reject(refreshError);
-        } finally {
-          isRefreshing = false;
         }
       }
 
       return Promise.reject(error);
     }
-  )
-}
+  );
+};

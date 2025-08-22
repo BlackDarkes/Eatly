@@ -8,6 +8,7 @@
   background-color: $mainWhite;
   transform: translateX(100%);
   transition: $transition;
+  z-index: $z-400;
 
   &List {
     display: flex;

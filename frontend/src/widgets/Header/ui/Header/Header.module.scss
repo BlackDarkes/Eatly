@@ -5,12 +5,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-block: rem(47) rem(25);
+    padding-block: rem(25);
     border-bottom: rem(1) solid $secondaryGray;
-
-    @include tablet() {
-      padding-block: rem(25);
-    }
   }
 
   &Logo {

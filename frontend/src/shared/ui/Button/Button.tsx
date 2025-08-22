@@ -3,13 +3,14 @@ import styles from './Button.module.scss'
 
 interface IButtonProps {
   children: ReactNode;
-  onClick: () => void;
   className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit";
 }
   
-export const Button = ({ children, className, onClick }: IButtonProps) => {
+export const Button = ({ children, className, onClick, type = "button" }: IButtonProps) => {
   return (
-    <button type="button" onClick={onClick} className={`${className ? className : ""} ${styles.button}`}>
+    <button type={type} onClick={onClick} className={`${className ? className : ""} ${styles.button}`}>
       {children}
     </button>
   );

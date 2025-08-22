@@ -7,11 +7,12 @@ interface IStore {
   user: { id: number; email: string; fullname: string; avatar: string } | null;
   isAuthenticated: boolean;
   setUser: (user: IStore['user']) => void;
-  type: "login" | "register" | null;
-  handleType: (type: "login" | "register") => void;
+  type: "login" | "register" | "forgetPassword" | null;
+  handleType: (type: "login" | "register" | "forgetPassword") => void;
   isLoading: boolean;
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
+  clearAuth: () => void;
 }
 
 export const useStore = create<IStore>()(
@@ -66,6 +67,12 @@ export const useStore = create<IStore>()(
           isLoading: false,
         })
       }
-    }
+    },
+
+    clearAuth: () => set({
+      user: null,
+      isAuthenticated: false,
+      isLoading: false,
+    })
   }))
 )

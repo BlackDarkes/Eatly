@@ -1,1 +1,2 @@
-export { LoginForm } from "./ui/LoginForm/LoginForm";
+export { LoginForm } from "./ui/LoginForm";
+export { useGoTo } from "./modules/GoTo";
