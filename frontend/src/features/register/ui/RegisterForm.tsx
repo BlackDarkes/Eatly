@@ -1,6 +1,5 @@
 import type { IRegister } from "@shared/types";
 import { useState } from "react";
-import { useGoTo } from "@features/login";
 import { useRegister } from "../api/useRegister";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import IconPassword from "../assets/password.svg?react";
@@ -10,7 +9,6 @@ import { useStore } from "@app/store/store";
 
 export const RegisterForm = () => {
   const [hide, setHide] = useState<boolean>(false);
-  const { goTo } = useGoTo();
   const [typePassword, setTypePassword] = useState("password");
   const {
     register,
@@ -117,13 +115,12 @@ export const RegisterForm = () => {
         </Button>
         <p className={styles.registerFormSingUp}>
           Already Have An Account?{" "}
-          <button
-            type="button"
-            onClick={() => goTo("login")}
+          <Button
+            link="../login"
             className={styles.registerFormSingUpLink}
           >
             Log In
-          </button>
+          </Button>
         </p>
       </div>
     </form>

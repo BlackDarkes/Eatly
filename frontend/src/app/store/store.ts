@@ -8,7 +8,7 @@ interface IStore {
   isAuthenticated: boolean;
   setUser: (user: IStore['user']) => void;
   type: "login" | "register" | "forgetPassword" | null;
-  handleType: (type: "login" | "register" | "forgetPassword") => void;
+  handleType: (type: "login" | "register" | "forgetPassword" | null) => void;
   isLoading: boolean;
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;

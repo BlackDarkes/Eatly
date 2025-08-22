@@ -1,7 +1,6 @@
 import type { ILogin } from "@shared/types";
 import { useState } from "react";
 import { useLogin } from "@features/login/api/useLogin";
-import { useGoTo } from "@features/login/modules/GoTo";
 import { Button } from "@shared/ui/Button/Button";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import IconPassword from "../assets/password.svg?react";
@@ -17,7 +16,6 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<ILogin>();
   const { mutate } = useLogin();
-  const { goTo } = useGoTo();
 
   const handlePasswordType = () => {
     setTypePassword((prevType) =>
@@ -85,28 +83,27 @@ export const LoginForm = () => {
               {errors.password.message as string}
             </span>
           )}
-          <button
+          <Button
             type="button"
-            onClick={() => goTo("forgetPassword")}
+            link="/auth/forgetPassword"
             className={styles.loginFormForget}
           >
             Forget Password ?
-          </button>
+          </Button>
         </div>
       </div>
       <div>
-        <Button type="submit" className={styles.loginFormLoginButton}>
+        <Button className={styles.loginFormLoginButton}>
           SING IN
         </Button>
         <p className={styles.loginFormSingUp}>
           Create A New Account?{" "}
-          <button
-            type="button"
-            onClick={() => goTo("register")}
+          <Button
+            link="../register"
             className={styles.loginFormSingUpLink}
           >
             Sign Up
-          </button>
+          </Button>
         </p>
       </div>
     </form>

@@ -1,82 +1,26 @@
 import { useStore } from "@app/store/store";
-import { LoginForm } from "@features/login";
-import { RegisterForm } from "@features/register";
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { Link } from "react-router";
-import IconApple from "../../assets/icons/Apple_logo_black 1.svg?react";
+import { FormPanel } from "../FormPanel/FormPanel";
+import styles from "./AuthForms.module.scss";
+import { AsidePanel } from "../AsidePanel/AsidePanel";
+import { useLocation } from "react-router";
+import { Container } from "@shared/ui/Container/Container";
 
 export const AuthForms = () => {
-  const { type, user, isAuthenticated, logout } = useStore();
-  const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
+  const { type } = useStore();
+  const navigation = useLocation().pathname;
+  const currentRoute = navigation.split('/').pop() as "login" | "register" | "forgetPassword";
 
-  useEffect(() => {
-    let root = document.getElementById("modal-root");
-
-    if (!root) {
-      root = document.createElement("div");
-      root.id = "modal-root";
-      document.body.appendChild(root);
-    }
-
-    setModalRoot(root);
-
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
-
-  if (!modalRoot) {
-    return null;
-  }
-
-  console.log(user);
-
-  return createPortal(
+  return (
     <>
-      {isAuthenticated ? (
-        <>
-          <h2>user</h2>
-          <div>
-            <h1>{user?.fullname}</h1>
-            <p>{user?.email}</p>
-            <img
-              src={`${import.meta.env.VITE_API_URL}/${user?.avatar}`}
-              alt=""
-            />
-          </div>
-          <button type="button" onClick={() => logout()}>
-            logout
-          </button>
-        </>
-      ) : (
-        <>
-          <div>
-            <div>
-              <h2>Sign Up To eatly</h2>
+      <section
+        className={`${styles.authForm} ${type ? styles.authFormActive : ""}`}
+      >
+        <Container className={styles.authFormContainer}>
+          <FormPanel type={currentRoute} />
 
-              <div>
-                <button type="button">G</button>
-                <button type="button">
-                  <IconApple />
-                </button>
-              </div>
-
-              <p>OR</p>
-            </div>
-
-            <div>{type === "login" ? <LoginForm /> : <RegisterForm />}</div>
-          </div>
-
-          <div>
-            <Link to={"/"}>Privacy Policy</Link>
-            <p>Copyright 2022</p>
-          </div>
-        </>
-      )}
-    </>,
-    modalRoot
+          <AsidePanel />
+        </Container>
+      </section>
+    </>
   );
 };

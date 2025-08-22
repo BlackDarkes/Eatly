@@ -6,7 +6,7 @@ import { Burger } from "../../../burger/ui/Burger/Burger";
 import LogoImage from "/logo.svg";
 import styles from './Header.module.scss'
 import { useState } from "react";
-import { AuthForms } from "@widgets/authForms";
+import { useStore } from "@app/store/store";
 
 interface IHeaderProps {
   page: string
@@ -14,17 +14,20 @@ interface IHeaderProps {
   
 export const Header = ({ page }: IHeaderProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { handleType } = useStore();
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   }
 
   const onLogin = () => {
-    console.log("Login");
+    handleType("login")
+    setIsOpen(false);
   }
 
   const onRegister = () => {
-    console.log("register")
+    handleType("register")
+    setIsOpen(false);
   }
 
   return (
@@ -43,11 +46,9 @@ export const Header = ({ page }: IHeaderProps) => {
           </nav>
         </div>
 
-        <AuthButtons onLogin={onLogin} className={styles.headerAuthButtons} onRegister={onRegister} />
+        <AuthButtons className={styles.headerAuthButtons} />
 
         <Burger isOpen={isOpen} handleOpen={handleOpen} onLogin={onLogin} onRegister={onRegister} />
-
-        <AuthForms />
       </Container>
     </header>
   );

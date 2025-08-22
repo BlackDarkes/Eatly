@@ -3,8 +3,10 @@
   column-gap: rem(10);
 
   &Button {
+    display: block;
+    padding: rem(12) rem(19);
     border-radius: rem(18);
-    font-weight: 700;
+    font-weight: 500;
 
     &:first-child {
       background-color: transparent;
