@@ -91,6 +91,10 @@
     align-items: flex-end;
     column-gap: rem(14);
     margin-top: rem(23);
+
+    @include mobile() {
+      justify-content: center;
+    }
   }
 
   &Stars {
