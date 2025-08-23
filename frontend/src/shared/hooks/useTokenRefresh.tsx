@@ -17,6 +17,6 @@ export const useTokenRefresh = () => {
       }
 
       return () => clearInterval(interval);
-    }, 15 * 60 * 1000);
+    }, 5 * 60 * 1000);
   }, [isAuthenticated]);
 }
