@@ -1,4 +1,4 @@
-import { NAVIGATION_POINTS } from "@shared/constants/navigation";
+import { NAVIGATION_POINTS } from "@widgets/header/constants/navigation";
 import { Link } from "react-router";
 import styles from './navigation.module.scss'
 

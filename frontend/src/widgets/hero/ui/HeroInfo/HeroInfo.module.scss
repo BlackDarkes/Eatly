@@ -17,6 +17,10 @@
     align-items: center;
     column-gap: rem(14);
     color: $opacityGray;
+
+    @include mobile() {
+      color: $secondaryBlack;
+    }
   }
 
   &Title {

@@ -1,0 +1,15 @@
+.features {
+  font-family: $inter;
+  background: no-repeat center/cover;
+
+  &List {
+    display: flex;
+    justify-content: center;
+    padding-block: rem(40);
+
+    @include mobile() {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
