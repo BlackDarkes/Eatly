@@ -1,0 +1,38 @@
+.ourRestorants {
+  font-family: $poppins;
+
+  &Container {
+    padding-block: rem(75) rem(85);
+  }
+
+  &Title {
+    @include fluid-text(45, 30);
+    text-align: center;
+    margin-bottom: clamp(rem(60),7vw,rem(85));
+
+    &Restaurants {
+      color: $mainPurple;
+    }
+  }
+
+  &View {
+    @include focus();
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    width: fit-content;
+    column-gap: rem(20);
+    margin-top: rem(65);
+    color: $secondaryLightGray;
+    transition: $transition;
+
+    @include hover() {
+      color: $mainBlack;
+    }
+
+    &:active {
+      transform: translateY(rem(1));
+    }
+  }
+}

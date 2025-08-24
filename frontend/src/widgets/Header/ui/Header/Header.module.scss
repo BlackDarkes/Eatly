@@ -1,5 +1,11 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   font-family: $inter;
+  background-color: $secondaryWhite;
+  z-index: $z-500;
 
   &Container {
     display: flex;

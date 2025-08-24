@@ -14,6 +14,10 @@ function App() {
 
   useEffect(() => {
     checkAuth();
+    
+    if (!localStorage.getItem("favourites")) {
+      localStorage.setItem("favourites", JSON.stringify([]));
+    }
   }, [checkAuth])
 
   return (

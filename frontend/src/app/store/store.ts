@@ -10,9 +10,11 @@ interface IStore {
   type: "login" | "register" | "forgetPassword" | null;
   handleType: (type: "login" | "register" | "forgetPassword" | null) => void;
   isLoading: boolean;
+  favourites: string[],
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
   clearAuth: () => void;
+  changeFavourites: (favourites: string) => void;
 }
 
 export const useStore = create<IStore>()(
@@ -21,6 +23,7 @@ export const useStore = create<IStore>()(
     isAuthenticated: false,
     type: null,
     isLoading: true,
+    favourites: JSON.parse(localStorage.getItem("favourites")!) || [],
 
     setUser: (user) => set({
       user,
@@ -73,6 +76,23 @@ export const useStore = create<IStore>()(
       user: null,
       isAuthenticated: false,
       isLoading: false,
-    })
+    }),
+
+    changeFavourites: (favourit: string) => {
+      set((state) => {
+        let currentFavorites = [...state.favourites];
+
+        if (currentFavorites.includes(favourit)) {
+          currentFavorites = currentFavorites.filter((favorite) => favorite !== favourit);
+        } else {
+          currentFavorites.push(favourit);
+        }
+
+        state.favourites = currentFavorites;
+        localStorage.setItem("favourites", JSON.stringify(currentFavorites));
+        
+        return { }
+      })
+    }
   }))
 )

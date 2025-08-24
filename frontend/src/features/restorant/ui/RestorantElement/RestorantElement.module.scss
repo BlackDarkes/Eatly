@@ -1,0 +1,71 @@
+.item {
+  position: relative;
+  width: min(100%, rem(395));
+  border-radius: rem(30);
+  background-color: $mainWhite;
+  z-index: $z-300;
+  transition: $transition;
+
+  @include hover() {
+    box-shadow: rem(5) rem(5) rem(20) $mainPurple;
+  }
+  
+  &Info {
+    position: relative;
+    padding: rem(10) 0 clamp(rem(14),8vw,rem(18)) clamp(rem(27),7vw,rem(32));
+  }
+
+  &Image {
+    width: 100%;
+  }
+
+  &Type {
+    padding: rem(2) rem(8);
+    font-size: rem(12);
+    border-radius: rem(5);
+  }
+
+  &Title {
+    @include fluid-text(25, 20);
+    color: $darkPurple;
+    font-weight: 600;
+  }
+
+  &Rating {
+    display: flex;
+    align-items: center;
+    column-gap: rem(5);
+    font-family: $manrope;
+    color: $secondaryLightPurple;
+    font-size: rem(14);
+  }
+
+  &Time {
+    display: flex;
+    column-gap: rem(4);
+  }
+
+  &Star {
+    color: $mainPurple;
+  }
+
+  &Favourites {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: rem(19);
+    right: rem(12);
+    width: rem(30);
+    aspect-ratio: 1;
+    background-color: #DBD9EE;
+    color: $mainBlue;
+    border-radius: 50%;
+    z-index: $z-400;
+    transition: $transition;
+
+    &Select {
+      color: $mainPurple;
+    }
+  }
+}

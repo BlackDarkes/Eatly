@@ -1,0 +1,1 @@
+export { TYPES_EAT } from "./typesEat/typesEat";

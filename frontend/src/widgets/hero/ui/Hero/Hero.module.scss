@@ -1,6 +1,7 @@
 .hero {
+  margin-top: rem(94);
   font-family: $poppins;
-
+  
   &Container {
     display: flex;
     column-gap: rem(40);

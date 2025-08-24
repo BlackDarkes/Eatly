@@ -2,6 +2,10 @@ button, label {
   cursor: pointer;
 }
 
+body {
+  background-color: $secondaryWhite;
+}
+
 a {
   text-decoration: none;
   color: inherit;

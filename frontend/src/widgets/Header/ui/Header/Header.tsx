@@ -2,7 +2,7 @@ import { Container } from "@shared/ui/Container/Container";
 import { Navigation } from "../Navigation/Navigation";
 import { Link } from "react-router";
 import { AuthButtons } from "../AuthButtons/AuthButtons";
-import { Burger } from "../../../burger/ui/Burger/Burger";
+import { Burger } from "../Burger/Burger";
 import LogoImage from "/logo.svg";
 import styles from './Header.module.scss'
 import { useState } from "react";
