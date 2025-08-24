@@ -2,7 +2,8 @@
   font-family: $poppins;
 
   &Container {
-    padding-block: rem(75) rem(85);
+    padding-block: rem(75) clamp(rem(65),7vw,rem(85));
+    border-bottom: rem(1) solid $secondaryGray; 
   }
 
   &Title {

@@ -1,0 +1,82 @@
+.item {
+  position: relative;
+  background-color: $mainWhite;
+  padding: rem(26) rem(17) rem(22) rem(10);
+  border-radius: rem(24);
+
+  &Favourit {
+    position: absolute;
+    top: rem(20);
+    right: rem(20);
+
+    &Select {
+      color: $mainPurple;
+    }
+  }
+
+  &Link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &Type {
+    padding: rem(2) rem(8);
+    font-size: rem(12);
+    border-radius: rem(5);
+    font-family: $poppins;
+  }
+
+  &Title {
+    @include fluid-text(25, 20);
+    color: $darkPurple;
+    font-weight: 600;
+    font-family: $poppins;
+  }
+
+  &Rating {
+    display: flex;
+    align-items: center;
+    column-gap: rem(5);
+    font-family: $manrope;
+    color: $secondaryLightPurple;
+    font-size: rem(14);
+  }
+
+  &Time {
+    display: flex;
+    column-gap: rem(4);
+  }
+
+  &Star {
+    color: $mainPurple;
+  }
+
+  &Price {
+    @include fluid-text(18, 16);
+    margin-top: rem(10);
+    font-weight: 700;
+    color: $darkPurple;
+  }
+
+  &Buy {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: rem(19);
+    right: rem(12);
+    width: rem(31);
+    aspect-ratio: 1;
+    background-color: $darkPurple;
+    color: $mainWhite;
+    border-radius: rem(6);
+    z-index: $z-400;
+    transition: $transition;
+
+    &Select {
+      color: $mainPurple;
+    }
+  }
+}

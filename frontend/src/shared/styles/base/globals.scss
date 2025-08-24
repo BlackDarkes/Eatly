@@ -1,18 +1,17 @@
-button, label {
-  cursor: pointer;
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background-color: $secondaryWhite;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 li {
   list-style: none;
+}
+
+img, button {
+  user-select: none;
 }
 
 button {
@@ -25,10 +24,15 @@ button {
   transition: $transition;
 }
 
-html {
-  -webkit-tap-highlight-color: transparent;
+button, label {
+  cursor: pointer;
 }
 
 input {
   outline: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

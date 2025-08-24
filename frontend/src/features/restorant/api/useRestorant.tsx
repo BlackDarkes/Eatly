@@ -6,7 +6,7 @@ export const useRestorant = () => {
   const { isLoading, error, data: restorants } = useQuery<IRestorant[]>({
     queryKey: ["restoran"],
     queryFn: async () => {
-      const response = await baseApi.get("/restoran");
+      const response = await baseApi.get<IRestorant[]>("/restoran");
       return response.data;
     }
   })

@@ -1,0 +1,11 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  column-gap: rem(20);
+
+  @include tablet() {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(40) rem(20);
+  }
+}

@@ -31,7 +31,10 @@ export class DishesEntity {
 	@Column("int")
 	time: number;
 
-	@Column("decimal", { precision: 6, scale: 2 })
+	@Column("decimal", { precision: 3, scale: 1 })
+	stars: number;
+
+	@Column("decimal", { precision: 6, scale: 2, default: 0 })
 	price: number;
 
 	@CreateDateColumn()

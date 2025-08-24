@@ -5,5 +5,5 @@ export const TYPES_EAT: {
 } = {
   Healthy: "#F7EDD0",
   Trending: "#F7C5BA",
-  Supreme: "#33AC64"
+  Supreme: "#33AC6433"
 }

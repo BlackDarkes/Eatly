@@ -1,5 +1,5 @@
 import type { IRestorant } from "@shared/types/restorant/restorant.interface";
-import IconStar from "../../assets/Star.svg?react";
+import IconStar from "/public/icons/Star.svg?react";
 import IconBookMark from "../../assets/bookMark.svg?react";
 import styles from "./RestorantElement.module.scss";
 import { Link } from "react-router";
