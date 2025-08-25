@@ -1,5 +1,5 @@
-import type { IDishes } from "@shared/types/dishes/dishes.interface";
-import { DishesElement } from "../ui/DishesElement/DishesElement";
+import type { IDishes } from "@entitiesdishes/types/dishes/dishes.interface";
+import { DishesElement } from "../../../entities/dishes/ui/DishesElement/DishesElement";
 import { useWindow } from "@shared/hooks/useWindow";
 
 interface IGenerateDishesProps {
@@ -7,16 +7,27 @@ interface IGenerateDishesProps {
   handleClickFavourit: (dish: string) => void;
   handleClickCart: (dish: string) => void;
 }
-  
-export const GenerateDishes = ({ dishes, handleClickFavourit, handleClickCart }: IGenerateDishesProps) => {
+
+export const GenerateDishes = ({
+  dishes,
+  handleClickFavourit,
+  handleClickCart,
+}: IGenerateDishesProps) => {
   const { width } = useWindow();
   const renderElements = width >= 1024 ? dishes : dishes?.slice(0, 4);
 
   return (
     <>
       {renderElements?.map((dish) => {
-        return <DishesElement key={dish.id} dish={dish} handleClickFavourit={handleClickFavourit} handleClickCart={handleClickCart} />
+        return (
+          <DishesElement
+            key={dish.id}
+            dish={dish}
+            handleClickFavourit={handleClickFavourit}
+            handleClickCart={handleClickCart}
+          />
+        );
       })}
     </>
   );
-}
+};

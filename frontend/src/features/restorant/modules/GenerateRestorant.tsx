@@ -1,5 +1,5 @@
-import type { IRestorant } from "@shared/types/restorant/restorant.interface";
-import { RestorantElement } from "../ui/RestorantElement/RestorantElement";
+import type { IRestorant } from "src/entities/restorant/types/restorant.interface";
+import { RestorantElement } from "@entities/restorant";
 import { memo, type MouseEvent } from "react";
 
 interface IGenerateRestorantProps {

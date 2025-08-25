@@ -1,4 +1,4 @@
-import type { IDishes } from "@shared/types/dishes/dishes.interface";
+import type { IDishes } from "@entitiesdishes/types/dishes/dishes.interface";
 import IconHeart from "../../assets/heart.svg?react";
 import IconPlus from "../../assets/plus.svg?react";
 import IconStar from "/public/icons/Star.svg?react";
@@ -59,9 +59,15 @@ export const DishesElement = ({
       <button
         type="button"
         onClick={() => handleClickCart(dish.id)}
-        className={`${styles.itemBuy} ${SearchCartId(dish.id) ? styles.itemBuySelect : ""}`}
+        className={`${styles.itemBuy} ${
+          SearchCartId(dish.id) ? styles.itemBuySelect : ""
+        }`}
       >
-        <IconPlus className={`${styles.itemImage} ${SearchCartId(dish.id) ? styles.itemImageSelect : ""}`} />
+        <IconPlus
+          className={`${styles.itemImage} ${
+            SearchCartId(dish.id) ? styles.itemImageSelect : ""
+          }`}
+        />
       </button>
     </li>
   );

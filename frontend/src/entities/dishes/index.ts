@@ -1,0 +1,1 @@
+export { DishesElement } from "./ui/DishesElement/DishesElement";
