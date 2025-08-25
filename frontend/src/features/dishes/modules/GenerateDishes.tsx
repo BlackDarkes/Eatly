@@ -5,16 +5,17 @@ import { useWindow } from "@shared/hooks/useWindow";
 interface IGenerateDishesProps {
   dishes: IDishes[] | undefined;
   handleClickFavourit: (dish: string) => void;
+  handleClickCart: (dish: string) => void;
 }
   
-export const GenerateDishes = ({ dishes, handleClickFavourit }: IGenerateDishesProps) => {
+export const GenerateDishes = ({ dishes, handleClickFavourit, handleClickCart }: IGenerateDishesProps) => {
   const { width } = useWindow();
   const renderElements = width >= 1024 ? dishes : dishes?.slice(0, 4);
 
   return (
     <>
       {renderElements?.map((dish) => {
-        return <DishesElement key={dish.id} dish={dish} handleClickFavourit={handleClickFavourit} />
+        return <DishesElement key={dish.id} dish={dish} handleClickFavourit={handleClickFavourit} handleClickCart={handleClickCart} />
       })}
     </>
   );

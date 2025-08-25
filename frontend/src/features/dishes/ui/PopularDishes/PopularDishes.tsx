@@ -5,15 +5,19 @@ import { useStore } from "@app/store/store";
 
 export const PopularDishes = () => {
   const { dishes } = useDishes();
-  const { changeFavouritesDishes } = useStore();
+  const { changeFavouritesDishes, changeCart } = useStore();
 
   const handleClickFavourit = (dish: string) => {
     changeFavouritesDishes(dish);
   };
 
+  const handleClickCart = (dish: string) => {
+    changeCart(dish);
+  }
+
   return (
     <ul className={styles.list}>
-      <GenerateDishes dishes={dishes} handleClickFavourit={handleClickFavourit} />
+      <GenerateDishes dishes={dishes} handleClickFavourit={handleClickFavourit} handleClickCart={handleClickCart} />
     </ul>
   );
 };

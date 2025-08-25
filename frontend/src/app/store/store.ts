@@ -7,16 +7,22 @@ interface IStore {
   user: { id: number; email: string; fullname: string; avatar: string } | null;
   isAuthenticated: boolean;
   setUser: (user: IStore['user']) => void;
+
   type: "login" | "register" | "forgetPassword" | null;
-  handleType: (type: "login" | "register" | "forgetPassword" | null) => void;
   isLoading: boolean;
-  favouritesShop: string[],
-  favouritesDishes: string[],
+  handleType: (type: "login" | "register" | "forgetPassword" | null) => void;
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
   clearAuth: () => void;
+
+  favouritesShop: string[],
   changeFavouritesShop: (favourit: string) => void;
+
+  favouritesDishes: string[],
   changeFavouritesDishes: (dish: string) => void;
+
+  cart: string[],
+  changeCart: (dish: string) => void;
 }
 
 export const useStore = create<IStore>()(
@@ -27,6 +33,7 @@ export const useStore = create<IStore>()(
     isLoading: true,
     favouritesShop: JSON.parse(localStorage.getItem("favouritesShop")!) || [],
     favouritesDishes: JSON.parse(localStorage.getItem("favouritesDishes")!) || [],
+    cart: JSON.parse(localStorage.getItem("cart")!) || [],
 
     setUser: (user) => set({
       user,
@@ -83,7 +90,7 @@ export const useStore = create<IStore>()(
 
     changeFavouritesShop: (favourit: string) => {
       set((state) => {
-        let currentFavorites = [...state.favouritesShop];
+        let currentFavorites: string[] = [...state.favouritesShop];
 
         if (currentFavorites.includes(favourit)) {
           currentFavorites = currentFavorites.filter((favorite) => favorite !== favourit);
@@ -100,7 +107,7 @@ export const useStore = create<IStore>()(
 
     changeFavouritesDishes: (dish: string) => {
       set((state) => {
-        let currentFavorites = [...state.favouritesDishes];
+        let currentFavorites: string[] = [...state.favouritesDishes];
 
         if (currentFavorites.includes(dish)) {
           currentFavorites = currentFavorites.filter((dishes) => dishes !== dish);
@@ -112,6 +119,23 @@ export const useStore = create<IStore>()(
         localStorage.setItem("favouritesDishes", JSON.stringify(currentFavorites));
         
         return { }
+      })
+    },
+
+    changeCart: (dish: string) => {
+      set((state) => {
+        let currentCart: string[] = [...state.cart];
+
+        if (currentCart.includes(dish)) {
+          currentCart = currentCart.filter((product) => product !== dish);
+        } else {
+          currentCart.push(dish);
+        }
+
+        state.cart = currentCart;
+        localStorage.setItem("cart", JSON.stringify(currentCart));
+
+        return { };
       })
     }
   }))

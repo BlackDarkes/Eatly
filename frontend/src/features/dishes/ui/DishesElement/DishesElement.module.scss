@@ -82,7 +82,17 @@
     transition: $transition;
 
     &Select {
-      color: $mainPurple;
+      background-color: $mainPurple;
+    }
+  }
+
+  &Image {
+    width: rem(16);
+    height: rem(16);
+    transition: $transition;
+    
+    &Select {
+      rotate: 45deg;
     }
   }
 }

@@ -22,6 +22,10 @@ function App() {
     if (!localStorage.getItem("favouritesDishes")) {
       localStorage.setItem("favouritesDishes", JSON.stringify([]));
     };
+
+    if (!localStorage.getItem("cart")) {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
   }, [checkAuth])
 
   return (

@@ -1,12 +1,12 @@
+import { Link } from "react-router";
+import type { MouseEvent } from "react";
 import type { IRestorant } from "@shared/types/restorant/restorant.interface";
+import { TYPES_EAT } from "@shared/constants";
+import { TEXT_EAT } from "@shared/constants/textEat/textEat";
+import { SearchId } from "@shared/hooks/SearchId";
 import IconStar from "/public/icons/Star.svg?react";
 import IconBookMark from "../../assets/bookMark.svg?react";
 import styles from "./RestorantElement.module.scss";
-import { Link } from "react-router";
-import { TYPES_EAT } from "@shared/constants";
-import { TEXT_EAT } from "@shared/constants/textEat/textEat";
-import type { MouseEvent } from "react";
-import { SearchId } from "@shared/hooks/SearchId";
 
 interface IRestorantElementProps {
   restorant: IRestorant;
