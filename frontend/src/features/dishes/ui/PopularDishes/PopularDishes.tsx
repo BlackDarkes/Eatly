@@ -1,13 +1,19 @@
 import { useDishes } from "@features/dishes/api/useDishes";
 import { GenerateDishes } from "@features/dishes/modules/GenerateDishes";
-import styles from './PopularDishes.module.scss'
+import styles from "./PopularDishes.module.scss";
+import { useStore } from "@app/store/store";
 
 export const PopularDishes = () => {
   const { dishes } = useDishes();
+  const { changeFavouritesDishes } = useStore();
+
+  const handleClickFavourit = (dish: string) => {
+    changeFavouritesDishes(dish);
+  };
 
   return (
     <ul className={styles.list}>
-      <GenerateDishes dishes={dishes} />
+      <GenerateDishes dishes={dishes} handleClickFavourit={handleClickFavourit} />
     </ul>
   );
-}
+};

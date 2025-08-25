@@ -3,6 +3,11 @@
   background-color: $mainWhite;
   padding: rem(26) rem(17) rem(22) rem(10);
   border-radius: rem(24);
+  transition: $transition;
+
+  @include hover() {
+    box-shadow: rem(5) rem(5) rem(20) $mainPurple;
+  }
 
   &Favourit {
     position: absolute;
@@ -11,6 +16,7 @@
 
     &Select {
       color: $mainPurple;
+      stroke: $mainPurple;
     }
   }
 

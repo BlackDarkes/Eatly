@@ -10,11 +10,13 @@ interface IStore {
   type: "login" | "register" | "forgetPassword" | null;
   handleType: (type: "login" | "register" | "forgetPassword" | null) => void;
   isLoading: boolean;
-  favourites: string[],
+  favouritesShop: string[],
+  favouritesDishes: string[],
   checkAuth: () => Promise<void>;
   logout: () => Promise<void>;
   clearAuth: () => void;
-  changeFavourites: (favourites: string) => void;
+  changeFavouritesShop: (favourit: string) => void;
+  changeFavouritesDishes: (dish: string) => void;
 }
 
 export const useStore = create<IStore>()(
@@ -23,7 +25,8 @@ export const useStore = create<IStore>()(
     isAuthenticated: false,
     type: null,
     isLoading: true,
-    favourites: JSON.parse(localStorage.getItem("favourites")!) || [],
+    favouritesShop: JSON.parse(localStorage.getItem("favouritesShop")!) || [],
+    favouritesDishes: JSON.parse(localStorage.getItem("favouritesDishes")!) || [],
 
     setUser: (user) => set({
       user,
@@ -78,9 +81,9 @@ export const useStore = create<IStore>()(
       isLoading: false,
     }),
 
-    changeFavourites: (favourit: string) => {
+    changeFavouritesShop: (favourit: string) => {
       set((state) => {
-        let currentFavorites = [...state.favourites];
+        let currentFavorites = [...state.favouritesShop];
 
         if (currentFavorites.includes(favourit)) {
           currentFavorites = currentFavorites.filter((favorite) => favorite !== favourit);
@@ -88,8 +91,25 @@ export const useStore = create<IStore>()(
           currentFavorites.push(favourit);
         }
 
-        state.favourites = currentFavorites;
-        localStorage.setItem("favourites", JSON.stringify(currentFavorites));
+        state.favouritesShop = currentFavorites;
+        localStorage.setItem("favouritesShop", JSON.stringify(currentFavorites));
+        
+        return { }
+      })
+    },
+
+    changeFavouritesDishes: (dish: string) => {
+      set((state) => {
+        let currentFavorites = [...state.favouritesDishes];
+
+        if (currentFavorites.includes(dish)) {
+          currentFavorites = currentFavorites.filter((dishes) => dishes !== dish);
+        } else {
+          currentFavorites.push(dish);
+        }
+
+        state.favouritesDishes= currentFavorites;
+        localStorage.setItem("favouritesDishes", JSON.stringify(currentFavorites));
         
         return { }
       })

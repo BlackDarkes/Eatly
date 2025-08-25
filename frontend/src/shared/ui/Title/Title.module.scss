@@ -1,0 +1,9 @@
+.title {
+  @include fluid-text(45, 30);
+  text-align: center;
+  margin-bottom: clamp(rem(60), 7vw, rem(85));
+
+  &Purple {
+    color: $mainPurple;
+  }
+}

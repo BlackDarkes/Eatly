@@ -50,6 +50,7 @@
   }
 
   &Favourites {
+    @include focus();
     position: absolute;
     display: flex;
     justify-content: center;
@@ -63,6 +64,14 @@
     border-radius: 50%;
     z-index: $z-400;
     transition: $transition;
+
+    &:active {
+      transform: translateY(rem(1));
+    }
+
+    @include hover() {
+      color: $accentPurple;
+    }
 
     &Select {
       color: $mainPurple;

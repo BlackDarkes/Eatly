@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { TYPES_EAT } from "@shared/constants";
 import { TEXT_EAT } from "@shared/constants/textEat/textEat";
 import type { MouseEvent } from "react";
-import { SearchId } from "@features/restorant/modules/SearchId";
+import { SearchId } from "@shared/hooks/SearchId";
 
 interface IRestorantElementProps {
   restorant: IRestorant;
@@ -48,7 +48,7 @@ export const RestorantElement = ({
       <button
         type="button"
         onClick={handleClick}
-        className={`${styles.itemFavourites} ${SearchId(restorant.id) ? styles.itemFavouritesSelect : ""}`}
+        className={`${styles.itemFavourites} ${SearchId(restorant.id, "shop") ? styles.itemFavouritesSelect : ""}`}
       >
         <IconBookMark />
       </button>

@@ -6,11 +6,11 @@ import { useStore } from "@app/store/store";
   
 export const PopularRestorant = () => {
   const { restorants } = useRestorant();
-  const { changeFavourites } = useStore();
+  const { changeFavouritesShop } = useStore();
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>, favourit: string) => {
     e.stopPropagation();
-    changeFavourites(favourit)
+    changeFavouritesShop(favourit);
   }
 
   return (

@@ -15,9 +15,13 @@ function App() {
   useEffect(() => {
     checkAuth();
     
-    if (!localStorage.getItem("favourites")) {
-      localStorage.setItem("favourites", JSON.stringify([]));
-    }
+    if (!localStorage.getItem("favouritesShop")) {
+      localStorage.setItem("favouritesShop", JSON.stringify([]));
+    };
+
+    if (!localStorage.getItem("favouritesDishes")) {
+      localStorage.setItem("favouritesDishes", JSON.stringify([]));
+    };
   }, [checkAuth])
 
   return (

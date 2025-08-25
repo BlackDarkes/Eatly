@@ -6,15 +6,17 @@ import { Link } from "react-router";
 import { TYPES_EAT } from "@shared/constants";
 import { TEXT_EAT } from "@shared/constants/textEat/textEat";
 import styles from "./DishesElement.module.scss";
+import { SearchId } from "@shared/hooks/SearchId";
 
 interface IDishesElementProps {
   dish: IDishes;
+  handleClickFavourit:(dish: string) => void;
 }
 
-export const DishesElement = ({ dish }: IDishesElementProps) => {
+export const DishesElement = ({ dish, handleClickFavourit }: IDishesElementProps) => {
   return (
     <li className={styles.item}>
-      <button type="button" className={styles.itemFavourit}>
+      <button type="button"  onClick={() => handleClickFavourit(dish.id)} className={`${styles.itemFavourit} ${SearchId(dish.id, "dish") ? styles.itemFavouritSelect : ""}`}>
         <IconHeart />
       </button>
       <Link to={`/dish/${dish.id}`} className={styles.itemLink}>
