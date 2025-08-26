@@ -8,6 +8,7 @@ import { PurchasesHistoryEntity } from "./entities/purchases_history.entity";
 import { FeedbackEntity } from "./entities/feedback.entity";
 import { ArticlesEntity } from "../article/entities/articles.entity";
 import { ArticleInfoEntity } from "../article/entities/article_info.entity";
+import { PurchasesStatusEntity } from "./entities/purchasesStatus.entity";
 
 @Module({
 	imports: [
@@ -18,6 +19,7 @@ import { ArticleInfoEntity } from "../article/entities/article_info.entity";
 			FeedbackEntity,
 			ArticlesEntity,
 			ArticleInfoEntity,
+			PurchasesStatusEntity
 		]),
 	],
 	controllers: [UserController],

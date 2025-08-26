@@ -11,4 +11,9 @@ export class UserController {
   async getUser(@Param("id") id: string) {
     return this.usersService.findById(id);
   }
+
+  @Get(":id/purchases")
+  async getAllPurchases(@Param("id") id: string) {
+    return this.usersService.getUserPurchases(id);
+  }
 }

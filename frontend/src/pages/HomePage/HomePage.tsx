@@ -4,6 +4,7 @@ import { Features } from "@widgets/features";
 import { DownloadApp } from "@widgets/downloadApp";
 import { OurRestorants } from "@widgets/ourRestorants";
 import { OurDishes } from "@widgets/ourDishes/ui/OurDishes";
+import { ControlPurchases } from "@widgets/controlPurchases";
 
 export const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ export const HomePage = () => {
       <DownloadApp />
       <OurRestorants />
       <OurDishes />
+      <ControlPurchases />
     </>
   );
 }
