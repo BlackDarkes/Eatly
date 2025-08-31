@@ -3,6 +3,8 @@ import { AppModule } from "./app.module";
 import * as cookieParser from "cookie-parser";
 import { config } from "dotenv";
 
+config();
+
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -10,7 +12,7 @@ async function bootstrap() {
 	app.enableCors({
 		origin: [
 			"http://localhost:3000",
-			"http://192.168.0.104:3000"
+			`http://${process.env.HOST}:3000`
 		],
 		methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 		allowedHeaders: ["Content-Type", "Authorization", "Accept"],
