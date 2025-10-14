@@ -1,8 +1,0 @@
-.asidePanel {
-  width: 100%;
-  background-color: $mainPurple;
-
-  @include tablet() {
-    display: none;
-  }
-}

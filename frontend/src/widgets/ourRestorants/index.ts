@@ -1,1 +1,0 @@
-export { OurRestorants } from "./ui/OurRestorants"

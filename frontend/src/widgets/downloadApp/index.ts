@@ -1,1 +1,0 @@
-export { DownloadApp } from "./ui/DownloadApp/DownloadApp";

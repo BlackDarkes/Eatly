@@ -1,37 +1,10 @@
-import { Module } from "@nestjs/common";
-import { UsersModule } from "./modules/user/users.module";
-import { SubscriptionModule } from "./modules/subscription/subscription.module";
-import { ArticleModule } from "./modules/article/article.module";
-import { RestorantModule } from "./modules/restorant/restorant.module";
-import { AuthModule } from "./modules/auth/auth.module";
-import { ServeStaticModule } from "@nestjs/serve-static";
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import { join } from "path";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { getTypeOrmConfig } from "./config/typeorm.config";
-import { SupportModule } from './modules/support/support.module';
-import { DishModule } from './modules/dish/dish.module';
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
-	imports: [
-		ConfigModule.forRoot({
-			isGlobal: true,
-		}),
-		ServeStaticModule.forRoot({
-			rootPath: join(__dirname, "..", "public"),
-		}),
-		TypeOrmModule.forRootAsync({
-			imports: [ConfigModule],
-			useFactory: getTypeOrmConfig,
-			inject: [ConfigService],
-		}),
-		UsersModule,
-		SubscriptionModule,
-		ArticleModule,
-		RestorantModule,
-		AuthModule,
-		SupportModule,
-		DishModule,
-	],
+  imports: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

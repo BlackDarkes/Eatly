@@ -1,1 +1,0 @@
-export { ControlPurchases } from "./ui/ControlPurchases/ControlPurchases";
